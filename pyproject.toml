@@ -1,6 +1,7 @@
 [tool.poetry]
-name = "aco-ref-converter"
+name = "aco-camera-ref-converter"
 version = "0.1.0"
+package-mode = false
 description = ""
 authors = ["Taylor Denouden <taylor.denouden@hakai.org>"]
 readme = "README.md"
