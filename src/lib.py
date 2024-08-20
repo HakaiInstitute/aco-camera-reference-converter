@@ -6,6 +6,7 @@ from typing import Literal
 import polars as pl
 import pyproj.sync
 from csrspy import CSRSTransformer
+from csrspy.enums import CoordType
 
 logger = logging.getLogger(__name__)
 
@@ -51,11 +52,11 @@ def dms_to_decimal(dms_str: str) -> float:
 
 
 def convert_coords(
-        df: pl.DataFrame,
-        coord_type: Literal["dms", "dd"] = "dd",
-        image_type: Literal["rgbi", "rgb"] = "rgbi",
-        rename_only: bool = False,
-        **kwargs,
+    df: pl.DataFrame,
+    coord_type: Literal["dms", "dd"] = "dd",
+    image_type: Literal["rgbi", "rgb"] = "rgbi",
+    should_transform: bool = True,
+    **kwargs,
 ) -> pl.DataFrame:
     sync_missing_grid_files()
 
@@ -73,7 +74,7 @@ def convert_coords(
         pl.col("Filename").str.replace_all(".iiq", f"_{image_type}.tif", literal=True)
     )
 
-    if rename_only:
+    if not should_transform:
         return df
 
     transformer = CSRSTransformer(**kwargs)
@@ -86,22 +87,39 @@ def convert_coords(
         )
         return pl.Series(list(transformer(list(zip(lon, lat, alt)))))
 
-    return (
-        df.with_columns(
-            pl.struct(["Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])"])
-            .map_batches(_do_convert, is_elementwise=True)
-            .alias("converted"),
-        )
-        .drop("Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])")
-        .with_columns(
-            pl.col("converted").list.get(0).alias("Origin(Easting[m]"),
-            pl.col("converted").list.get(1).alias("Northing[m]"),
+    df = df.with_columns(
+        pl.struct(["Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])"])
+        .map_batches(_do_convert, is_elementwise=True)
+        .alias("converted"),
+    ).drop("Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])")
+
+    if transformer.t_coords == CoordType.GEOG:
+        df = df.with_columns(
+            pl.col("converted").list.get(1).alias("Origin (Latitude[deg]"),
+            pl.col("converted").list.get(0).alias("Longitude[deg]"),
             pl.col("converted").list.get(2).alias("Altitude[m])"),
-        )
-        .select(
+        ).select(
             "Timestamp",
             "Filename",
-            "Origin(Easting[m]",
+            "Origin (Latitude[deg]",
+            "Longitude[deg]",
+            "Altitude[m])",
+            "Roll(X)[deg]",
+            "Pitch(Y)[deg]",
+            "Yaw(Z)[deg]",
+            "Omega[deg]",
+            "Phi[deg]",
+            "Kappa[deg]",
+        )
+    else:
+        df = df.with_columns(
+            pl.col("converted").list.get(0).alias("Origin (Easting[m]"),
+            pl.col("converted").list.get(1).alias("Northing[m]"),
+            pl.col("converted").list.get(2).alias("Altitude[m])"),
+        ).select(
+            "Timestamp",
+            "Filename",
+            "Origin (Easting[m]",
             "Northing[m]",
             "Altitude[m])",
             "Roll(X)[deg]",
@@ -111,4 +129,5 @@ def convert_coords(
             "Phi[deg]",
             "Kappa[deg]",
         )
-    )
+
+    return df

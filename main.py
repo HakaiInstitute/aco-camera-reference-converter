@@ -12,7 +12,7 @@ from src.lib import to_decimal_year, convert_coords
 
 
 def get_params(col, title: str, prefix: str) -> dict:
-    col.write(f"## {title}")
+    col.write(f"### {title}")
     ref_frame = col.selectbox(
         f"{title} Reference Frame",
         REFERENCE_FRAME_OPTS,
@@ -64,7 +64,7 @@ def get_params(col, title: str, prefix: str) -> dict:
 st.title("ACO Camera Reference Converter")
 
 # File upload
-file = st.file_uploader("Riegel Camera Locations CSV (WGS84)", type="csv")
+file = st.file_uploader("Riegel Camera Locations", type="csv")
 if file:
     df = pl.read_csv(file, encoding="iso-8859-1")
     missing_cols = set(REQUIRED_FILE_COLS) - set(df.columns)
@@ -75,28 +75,35 @@ if file:
     with st.expander("View uploaded file"):
         st.dataframe(df)
 
-col1, col2 = st.columns(2, gap="medium")
+image_type = st.radio(
+    "Imagery Type",
+    ["RGBI", "RGB"],
+    horizontal=True,
+    help='Determines the extension of the converted "Filename".',
+)
+should_transform = st.checkbox("Transform coordinates?", value=True)
 
-image_type = col1.radio("Imagery Type", ["RGBI", "RGB"])
-rename_only = col2.checkbox('Just rename "Filename" column', value=False)
-
-if not rename_only:
+if should_transform:
+    st.write("## Transform Parameters")
+    col1, col2 = st.columns(2, gap="medium")
     src_params = get_params(col1, "Source", "s")
     target_params = get_params(col2, "Target", "t")
 else:
     src_params = target_params = {}
 
 if st.button(
-        "Convert", disabled=(file is None), type="primary", use_container_width=True
+    "Convert", disabled=(file is None), type="primary", use_container_width=True
 ):
-    coord_type = "dms" if st.session_state.src_df["Origin (Latitude[deg]"].str.contains(
-        "°").any() else "dd"
+    coord_type = (
+        "dms"
+        if st.session_state.src_df["Origin (Latitude[deg]"].str.contains("°").any()
+        else "dd"
+    )
     converted_df = convert_coords(
         st.session_state.src_df,
         coord_type=coord_type,
         image_type=image_type.lower(),
-        rename_only=rename_only,
-
+        should_transform=should_transform,
         **{
             k: v
             for k, v in {**src_params, **target_params}.items()
