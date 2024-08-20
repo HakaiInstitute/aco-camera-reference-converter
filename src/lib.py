@@ -51,10 +51,11 @@ def dms_to_decimal(dms_str: str) -> float:
 
 
 def convert_coords(
-    df: pl.DataFrame,
-    coord_type: Literal["dms", "dd"] = "dd",
-    rename_only: bool = False,
-    **kwargs,
+        df: pl.DataFrame,
+        coord_type: Literal["dms", "dd"] = "dd",
+        image_type: Literal["rgbi", "rgb"] = "rgbi",
+        rename_only: bool = False,
+        **kwargs,
 ) -> pl.DataFrame:
     sync_missing_grid_files()
 
@@ -69,7 +70,7 @@ def convert_coords(
         )
 
     df = df.with_columns(
-        pl.col("Filename").str.replace_all(".iiq", "_rgbi.tif", literal=True)
+        pl.col("Filename").str.replace_all(".iiq", f"_{image_type}.tif", literal=True)
     )
 
     if rename_only:

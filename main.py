@@ -75,24 +75,28 @@ if file:
     with st.expander("View uploaded file"):
         st.dataframe(df)
 
-rename_only = st.checkbox('Just rename "Filename" column', value=False)
+col1, col2 = st.columns(2, gap="medium")
+
+image_type = col1.radio("Imagery Type", ["RGBI", "RGB"])
+rename_only = col2.checkbox('Just rename "Filename" column', value=False)
 
 if not rename_only:
-    col1, col2 = st.columns(2, gap="medium")
     src_params = get_params(col1, "Source", "s")
     target_params = get_params(col2, "Target", "t")
 else:
     src_params = target_params = {}
 
 if st.button(
-    "Convert", disabled=(file is None), type="primary", use_container_width=True
+        "Convert", disabled=(file is None), type="primary", use_container_width=True
 ):
+    coord_type = "dms" if st.session_state.src_df["Origin (Latitude[deg]"].str.contains(
+        "°").any() else "dd"
     converted_df = convert_coords(
         st.session_state.src_df,
-        coord_type="dms"
-        if st.session_state.src_df["Origin (Latitude[deg]"].str.contains("°").any()
-        else "dd",
+        coord_type=coord_type,
+        image_type=image_type.lower(),
         rename_only=rename_only,
+
         **{
             k: v
             for k, v in {**src_params, **target_params}.items()
