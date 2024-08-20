@@ -2,6 +2,7 @@ import polars as pl
 import streamlit as st
 from csrspy.enums import CoordType
 
+from lib import get_coord_type
 from src.consts import (
     REQUIRED_FILE_COLS,
     VERTICAL_DATUM_OPTS,
@@ -11,7 +12,8 @@ from src.consts import (
 from src.lib import to_decimal_year, convert_coords
 
 
-def get_params(col, title: str, prefix: str) -> dict:
+def _get_params(col, title: str, prefix: str) -> dict:
+    """Render Source/Target transformation parameters in Streamlit."""
     col.write(f"### {title}")
     ref_frame = col.selectbox(
         f"{title} Reference Frame",
@@ -81,35 +83,26 @@ image_type = st.radio(
     horizontal=True,
     help='Determines the extension of the converted "Filename".',
 )
-should_transform = st.checkbox("Transform coordinates?", value=True)
+should_transform = st.toggle("Transform coordinates?", value=True)
 
 if should_transform:
     st.write("## Transform Parameters")
     col1, col2 = st.columns(2, gap="medium")
-    src_params = get_params(col1, "Source", "s")
-    target_params = get_params(col2, "Target", "t")
+    src_params = _get_params(col1, "Source", "s")
+    target_params = _get_params(col2, "Target", "t")
 else:
     src_params = target_params = {}
 
 if st.button(
     "Convert", disabled=(file is None), type="primary", use_container_width=True
 ):
-    coord_type = (
-        "dms"
-        if st.session_state.src_df["Origin (Latitude[deg]"].str.contains("°").any()
-        else "dd"
-    )
-    converted_df = convert_coords(
+    st.session_state.converted_df = convert_coords(
         st.session_state.src_df,
-        coord_type=coord_type,
+        coord_type=(get_coord_type(st.session_state.src_df)),
         image_type=image_type.lower(),
         should_transform=should_transform,
-        **{
-            k: v
-            for k, v in {**src_params, **target_params}.items()
-            if k != "rename_only"
-        },
+        **src_params,
+        **target_params,
     )
-    st.session_state.converted_df = converted_df
     st.success("Conversion complete!")
-    st.dataframe(converted_df)
+    st.dataframe(st.session_state.converted_df)

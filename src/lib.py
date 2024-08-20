@@ -131,3 +131,9 @@ def convert_coords(
         )
 
     return df
+
+
+def get_coord_type(df: pl.DataFrame) -> Literal["dms", "dd"]:
+    if df["Origin (Latitude[deg]"].str.contains("°").any():
+        return "dms"
+    return "dd"
