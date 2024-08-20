@@ -2,13 +2,13 @@ import polars as pl
 import streamlit as st
 from csrspy.enums import CoordType
 
-from consts import (
+from src.consts import (
     REQUIRED_FILE_COLS,
     VERTICAL_DATUM_OPTS,
     REFERENCE_FRAME_OPTS,
     COORD_TYPE_OPTS,
 )
-from lib import to_decimal_year, convert_coords, sync_missing_grid_files
+from src.lib import to_decimal_year, convert_coords
 
 
 def get_params(col, title: str, prefix: str) -> dict:
@@ -59,7 +59,6 @@ def get_params(col, title: str, prefix: str) -> dict:
         f"{prefix}_vd": vertical_datum[1],
         f"{prefix}_epoch": epoch_value,
     }
-
 
 
 st.title("ACO Camera Reference Converter")
