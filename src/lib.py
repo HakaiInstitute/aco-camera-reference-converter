@@ -70,8 +70,9 @@ def convert_coords(
             ),
         )
 
+    new_suffix = "cal" if image_type == "rgb" else "rgbi"
     df = df.with_columns(
-        pl.col("Filename").str.replace_all(".iiq", f"_{image_type}.tif", literal=True)
+        pl.col("Filename").str.replace_all(".iiq", f"_{new_suffix}.tif", literal=True)
     )
 
     if not should_transform:
