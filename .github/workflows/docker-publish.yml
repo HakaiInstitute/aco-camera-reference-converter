@@ -2,9 +2,9 @@ name: Docker publish
 
 on:
   push:
-    # Publish `$default-branch` as Docker `latest` image.
+    # Publish `main` as Docker `latest` image.
     branches:
-      - $default-branch
+      - main
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -71,7 +71,7 @@ jobs:
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "$default-branch" ] && VERSION=latest
+          [ "$VERSION" == "main" ] && VERSION=latest
 
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
