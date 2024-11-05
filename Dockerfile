@@ -61,4 +61,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 ENTRYPOINT []
 
 # Command to run the Streamlit app
-CMD ["python", "-m", "streamlit", "run", "aco_ref_converter/app.py", "--server.address", "0.0.0.0"]
+CMD ["python", "-m", "streamlit", "run", "aco_camera_csv_converter/app.py", "--server.address", "0.0.0.0"]
