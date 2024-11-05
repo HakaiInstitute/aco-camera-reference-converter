@@ -1,5 +1,5 @@
 [project]
-name = "aco-camera-csv-converter"
+name = "aco_camera_csv_converter"
 version = "0.1.0"
 package-mode = false
 description = "Convert coordinates in Riegel Camera Locations CSVs"

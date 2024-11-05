@@ -6,7 +6,7 @@ resolution-markers = [
 ]
 
 [[package]]
-name = "aco-ref-converter"
+name = "aco-camera-csv-converter"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
