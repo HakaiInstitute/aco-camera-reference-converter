@@ -2,13 +2,13 @@ import polars as pl
 import streamlit as st
 from csrspy.enums import CoordType
 
-from src.consts import (
+from aco_camera_csv_converter.consts import (
     REQUIRED_FILE_COLS,
     VERTICAL_DATUM_OPTS,
     REFERENCE_FRAME_OPTS,
     COORD_TYPE_OPTS,
 )
-from src.lib import to_decimal_year, convert_coords, get_coord_type
+from aco_camera_csv_converter.lib import to_decimal_year, convert_coords, get_coord_type
 
 
 def _get_params(col, title: str, prefix: str) -> dict:
