@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f9be7cb-1557-4fbc-abc5-aed69829c089" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/aco-camera-reference-converter.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ACO_Camera_CSV_Converter.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ruff.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
@@ -59,7 +52,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Docker.compose.yaml: Compose Deployment.executor": "Run",
+    "Python.aco_camera_csv_converter.app.executor": "Run",
+    "Python.app.executor": "Run",
     "Python.main.executor": "Run",
+    "Python.streamlit run -m aco_camera_csv_converter.app.executor": "Run",
+    "Python.streamlit run aco_camera_csv_converter.app.executor": "Run",
+    "Python.streamlit.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -73,7 +71,30 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.streamlit">
+    <configuration name="streamlit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="aco-camera-reference-converter" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="streamlit" />
+      <option name="PARAMETERS" value="run aco_camera_csv_converter/app.py" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="true" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml" />
       <method v="2" />
@@ -88,8 +109,13 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Docker.compose.yaml: Compose Deployment" />
+      <item itemvalue="Python.streamlit" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.streamlit" />
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -111,7 +137,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733437917534</updated>
       <workItem from="1733437918958" duration="536000" />
-      <workItem from="1733438456422" duration="2784000" />
+      <workItem from="1733438456422" duration="4292000" />
     </task>
     <servers />
   </component>
@@ -120,5 +146,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/aco_camera_reference_converter$main.coverage" NAME="main Coverage Results" MODIFIED="1733441119150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/aco_camera_csv_converter" />
+    <SUITE FILE_PATH="coverage/aco_camera_reference_converter$app.coverage" NAME="streamlit Coverage Results" MODIFIED="1733442552213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -12,5 +12,10 @@ dependencies = [
     "streamlit>=1.40.2",
 ]
 
+[dependency-groups]
+dev = [
+    "watchdog>=6.0.0",
+]
+
 [tool.uv.workspace]
 members = ["proj"]
