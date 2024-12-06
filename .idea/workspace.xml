@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f9be7cb-1557-4fbc-abc5-aed69829c089" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/traefik/compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +49,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Docker.compose.yaml: Compose Deployment.executor": "Run",
+    "Docker.traefik/compose.yaml.traefik: Compose Deployment.executor": "Run",
     "Python.aco_camera_csv_converter.app.executor": "Run",
     "Python.app.executor": "Run",
     "Python.main.executor": "Run",
@@ -106,13 +107,28 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="traefik/compose.yaml.traefik: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="traefik" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="traefik/compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.traefik/compose.yaml.traefik: Compose Deployment" />
       <item itemvalue="Docker.compose.yaml: Compose Deployment" />
       <item itemvalue="Python.streamlit" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
+        <item itemvalue="Docker.traefik/compose.yaml.traefik: Compose Deployment" />
         <item itemvalue="Python.streamlit" />
       </list>
     </recent_temporary>
@@ -134,7 +150,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733437917534</updated>
       <workItem from="1733437918958" duration="536000" />
-      <workItem from="1733438456422" duration="4794000" />
+      <workItem from="1733438456422" duration="5946000" />
     </task>
     <servers />
   </component>

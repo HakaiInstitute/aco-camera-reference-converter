@@ -1,6 +1,19 @@
 services:
-  streamlit:
+  aco-cam-csv-converter:
     build: .
+    container_name: aco_ccc_traefik_gk
     ports:
-     - 8501:8501
+      - 8501:8501
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.strip-path.stripprefix.prefixes=/aco-cam-centers-converter
+      - traefik.http.routers.aco-ccc.rule=PathPrefix(`/aco-cam-centers-converter`)
+      - traefik.http.routers.aco-ccc.middlewares=strip-path
+      - traefik.http.routers.aco-ccc.service=aco-ccc
+      - traefik.http.services.aco-ccc.loadbalancer.server.port=8501
 
+networks:
+  proxy:
+    external: true
