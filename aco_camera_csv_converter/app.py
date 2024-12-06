@@ -3,13 +3,13 @@ import streamlit as st
 from csrspy.enums import CoordType
 from csrspy.utils import date_to_decimal_year
 
-from aco_camera_csv_converter.consts import (
+from consts import (
     COORD_TYPE_OPTS,
     REFERENCE_FRAME_OPTS,
     REQUIRED_FILE_COLS,
     VERTICAL_DATUM_OPTS,
 )
-from aco_camera_csv_converter.lib import convert_coords, get_coord_type
+from lib import convert_coords, get_coord_type
 
 
 def _get_params(col, title: str, prefix: str) -> dict:

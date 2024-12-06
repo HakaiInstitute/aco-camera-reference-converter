@@ -8,9 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +68,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.streamlit">
+  <component name="RunManager" selected="Docker.compose.yaml: Compose Deployment">
     <configuration name="streamlit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aco-camera-reference-converter" />
       <option name="ENV_FILES" value="" />
@@ -115,8 +112,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.streamlit" />
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
+        <item itemvalue="Python.streamlit" />
       </list>
     </recent_temporary>
   </component>
@@ -137,7 +134,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733437917534</updated>
       <workItem from="1733437918958" duration="536000" />
-      <workItem from="1733438456422" duration="4292000" />
+      <workItem from="1733438456422" duration="4794000" />
     </task>
     <servers />
   </component>

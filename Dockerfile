@@ -60,5 +60,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
 
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
 # Command to run the Streamlit app
-CMD ["python", "-m", "streamlit", "run", "aco_camera_csv_converter/app.py", "--server.address", "0.0.0.0"]
+CMD ["streamlit", "run", "aco_camera_csv_converter/app.py", "--server.address", "0.0.0.0", "--server.port=8501"]
