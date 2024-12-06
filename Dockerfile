@@ -22,6 +22,7 @@ toolbarMode = 'viewer'\n\
 [server]\n\
 enableCORS = true\n\
 enableXsrfProtection = true\n\
+enableWebsocketCompression = true\n\
 \n\
 [theme]\n\
 base='dark'\n\
