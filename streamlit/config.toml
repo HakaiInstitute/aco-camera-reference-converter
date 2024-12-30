@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[client]
+showErrorDetails = true
+toolbarMode = 'minimal'
+
+[server]
+enableCORS = true
+enableXsrfProtection = true
+enableWebsocketCompression = true
+address = "0.0.0.0"
+port = 8501
+
+[theme]
+base='dark'

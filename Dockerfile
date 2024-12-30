@@ -9,36 +9,8 @@ ENV UV_COMPILE_BYTECODE=1
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 
-# Create config folder and configuration file
-RUN mkdir -p /root/.streamlit
-RUN echo "\
-[browser]\n\
-gatherUsageStats = false\n\
-\n\
-[client]\n\
-showErrorDetails = true\n\
-toolbarMode = 'viewer'\n\
-\n\
-[server]\n\
-enableCORS = true\n\
-enableXsrfProtection = true\n\
-enableWebsocketCompression = true\n\
-\n\
-[theme]\n\
-base='dark'\n\
-" > /root/.streamlit/config.toml
-
-# Create credentials file to disable telemetry
-RUN echo "\
-[general]\n\
-email = ''\n\
-" > /root/.streamlit/credentials.toml
-
-# Set environment variables
-ENV STREAMLIT_SERVER_PORT=8501
-ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
-ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
-ENV STREAMLIT_CLIENT_TOOLBAR_MODE=minimal
+# Copy config files
+COPY ./streamlit /root/.streamlit
 
 # Expose port
 EXPOSE 8501
@@ -64,4 +36,4 @@ ENTRYPOINT []
 #HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "aco_camera_csv_converter/app.py", "--server.address", "0.0.0.0", "--server.port=8501"]
+CMD ["streamlit", "run", "aco_camera_csv_converter/app.py"]
