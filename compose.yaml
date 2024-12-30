@@ -10,7 +10,7 @@ services:
       - traefik.http.routers.aco-ccc-router.service=aco_ccc_app
       - traefik.http.services.aco_ccc_app.loadbalancer.server.port=8501
       - traefik.http.routers.aco-ccc-router.middlewares=aco-ccc-strip-path
-      - traefik.http.middlewares.aco-ccc-strip-path.stripprefix.prefixes=/aco-cam-centers-converter
+      - traefik.http.middlewares.aco-ccc-strip-path.stripprefix.prefixes=/aco-cam-centers-converter/
 
 networks:
   proxy:
