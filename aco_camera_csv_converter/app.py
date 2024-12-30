@@ -1,14 +1,15 @@
 import polars as pl
 import streamlit as st
 from csrspy.enums import CoordType
+from csrspy.utils import date_to_decimal_year
 
-from src.consts import (
+from consts import (
+    COORD_TYPE_OPTS,
+    REFERENCE_FRAME_OPTS,
     REQUIRED_FILE_COLS,
     VERTICAL_DATUM_OPTS,
-    REFERENCE_FRAME_OPTS,
-    COORD_TYPE_OPTS,
 )
-from src.lib import to_decimal_year, convert_coords, get_coord_type
+from lib import convert_coords, get_coord_type
 
 
 def _get_params(col, title: str, prefix: str) -> dict:
@@ -40,7 +41,7 @@ def _get_params(col, title: str, prefix: str) -> dict:
 
     if prefix == "s":
         epoch = col.date_input(f"{title} Epoch", key=f"{prefix}_epoch")
-        epoch_value = to_decimal_year(epoch)
+        epoch_value = date_to_decimal_year(epoch)
     else:
         epoch_value = col.number_input(
             f"{title} Epoch",
@@ -76,15 +77,9 @@ if file:
     with st.expander("View uploaded file"):
         st.dataframe(df)
 
-image_type = st.radio(
-    "Imagery Type",
-    ["RGBI", "RGB"],
-    horizontal=True,
-    help='Determines the extension of the converted "Filename".',
-)
-should_transform = st.toggle("Transform coordinates?", value=True)
+name_only = st.toggle("Only update filenames", value=False)
 
-if should_transform:
+if not name_only:
     st.write("## Transform Parameters")
     col1, col2 = st.columns(2, gap="medium")
     src_params = _get_params(col1, "Source", "s")
@@ -98,8 +93,7 @@ if st.button(
     st.session_state.converted_df = convert_coords(
         st.session_state.src_df,
         coord_type=(get_coord_type(st.session_state.src_df)),
-        image_type=image_type.lower(),
-        should_transform=should_transform,
+        should_transform=(not name_only),
         **src_params,
         **target_params,
     )

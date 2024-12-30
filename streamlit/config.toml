@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[client]
+showErrorDetails = true
+toolbarMode = 'minimal'
+
+[server]
+enableCORS = true
+enableXsrfProtection = true
+enableWebsocketCompression = true
+port = 8501
+baseUrlPath="/aco-cam-centers-converter"
+
+[theme]
+base='dark'

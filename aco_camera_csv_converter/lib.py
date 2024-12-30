@@ -1,45 +1,12 @@
 import logging
-import time
-from datetime import datetime as dt
 from typing import Literal
 
 import polars as pl
-import pyproj.sync
 from csrspy import CSRSTransformer
 from csrspy.enums import CoordType
+from csrspy.utils import sync_missing_grid_files
 
 logger = logging.getLogger(__name__)
-
-
-def sync_missing_grid_files():
-    target_directory = pyproj.sync.get_user_data_dir(True)
-    endpoint = pyproj.sync.get_proj_endpoint()
-    grids = pyproj.sync.get_transform_grid_list(area_of_use="Canada")
-
-    if len(grids):
-        logger.info("Syncing PROJ grid files.")
-
-    for grid in grids:
-        filename = grid["properties"]["name"]
-        pyproj.sync._download_resource_file(
-            file_url=f"{endpoint}/{filename}",
-            short_name=filename,
-            directory=target_directory,
-            sha256=grid["properties"]["sha256sum"],
-        )
-
-
-def to_decimal_year(date: dt) -> float:
-    year = date.year
-    start_of_this_year = dt(year=year, month=1, day=1)
-    start_of_next_year = dt(year=year + 1, month=1, day=1)
-    year_elapsed = time.mktime(date.timetuple()) - time.mktime(
-        start_of_this_year.timetuple()
-    )
-    year_duration = time.mktime(start_of_next_year.timetuple()) - time.mktime(
-        start_of_this_year.timetuple()
-    )
-    return year + year_elapsed / year_duration
 
 
 def dms_to_decimal(dms_str: str) -> float:
@@ -54,7 +21,6 @@ def dms_to_decimal(dms_str: str) -> float:
 def convert_coords(
     df: pl.DataFrame,
     coord_type: Literal["dms", "dd"] = "dd",
-    image_type: Literal["rgbi", "rgb"] = "rgbi",
     should_transform: bool = True,
     **kwargs,
 ) -> pl.DataFrame:
@@ -70,9 +36,13 @@ def convert_coords(
             ),
         )
 
-    new_suffix = "cal" if image_type == "rgb" else "rgbi"
     df = df.with_columns(
-        pl.col("Filename").str.replace_all(".iiq", f"_{new_suffix}.tif", literal=True)
+        pl.col("Filename")
+        .str.replace_all(".iiq", f"_rgbi.tif", literal=True)
+        .alias("RGBI_Filename"),
+        pl.col("Filename")
+        .str.replace_all(".iiq", f"_cal.tif", literal=True)
+        .alias("RGB_Filename"),
     )
 
     if not should_transform:
@@ -114,21 +84,22 @@ def convert_coords(
         )
     else:
         df = df.with_columns(
-            pl.col("converted").list.get(0).alias("Origin (Easting[m]"),
+            pl.col("converted").list.get(0).alias("Easting[m]"),
             pl.col("converted").list.get(1).alias("Northing[m]"),
-            pl.col("converted").list.get(2).alias("Altitude[m])"),
+            pl.col("converted").list.get(2).alias("Altitude[m]"),
         ).select(
             "Timestamp",
-            "Filename",
-            "Origin (Easting[m]",
+            "RGBI_Filename",
+            "RGB_Filename",
+            "Easting[m]",
             "Northing[m]",
-            "Altitude[m])",
-            "Roll(X)[deg]",
-            "Pitch(Y)[deg]",
-            "Yaw(Z)[deg]",
+            "Altitude[m]",
             "Omega[deg]",
             "Phi[deg]",
             "Kappa[deg]",
+            "Roll(X)[deg]",
+            "Pitch(Y)[deg]",
+            "Yaw(Z)[deg]",
         )
 
     return df
