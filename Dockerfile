@@ -23,7 +23,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Then, add the rest of the project source code and install it
 # Installing separately from its dependencies allows optimal layer caching
-ADD aco_camera_csv_converter /app
+ADD . /app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
@@ -36,4 +36,4 @@ ENTRYPOINT []
 #HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "app.py"]
+CMD ["streamlit", "run", "aco_camera_csv_converter/app.py"]
