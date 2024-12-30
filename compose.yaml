@@ -3,17 +3,4 @@ services:
     build: .
     ports:
       - 8501:8501
-    container_name: aco_ccc_traefik_gk
-    networks:
-      - proxy
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.aco-ccc-router.rule=PathPrefix(`/aco-cam-centers-converter`)
-      - traefik.http.routers.aco-ccc-router.service=aco_ccc_app
-      - traefik.http.services.aco_ccc_app.loadbalancer.server.port=8501
-      - traefik.http.routers.aco-ccc-router.middlewares=aco-ccc-strip-path
-      - traefik.http.middlewares.aco-ccc-strip-path.stripprefix.prefixes=/aco-cam-centers-converter/
 
-networks:
-  proxy:
-    external: true
