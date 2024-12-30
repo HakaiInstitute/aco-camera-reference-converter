@@ -1,6 +1,8 @@
 services:
   aco-cam-csv-converter:
     build: .
+    ports:
+      - 8501:8501
     container_name: aco_ccc_traefik_gk
     networks:
       - proxy
