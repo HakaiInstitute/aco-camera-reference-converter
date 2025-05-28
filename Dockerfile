@@ -35,5 +35,5 @@ ENTRYPOINT []
 
 #HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 
-# Command to run the Streamlit app
-CMD ["streamlit", "run", "aco_camera_csv_converter/app.py"]
+# Command to run the Streamlit app using module path
+CMD ["python", "-m", "streamlit", "run", "aco_camera_csv_converter/app.py"]

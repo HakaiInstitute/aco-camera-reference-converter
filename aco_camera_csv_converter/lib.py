@@ -20,7 +20,7 @@ def dms_to_decimal(dms_str: str) -> float:
 
 def convert_coords(
     df: pl.DataFrame,
-    coord_type: Literal["dms", "dd"] = "dd",
+    coord_type: Literal["dms", "dd", "cart"] = "dd",
     should_transform: bool = True,
     **kwargs,
 ) -> pl.DataFrame:
@@ -38,10 +38,10 @@ def convert_coords(
 
     df = df.with_columns(
         pl.col("Filename")
-        .str.replace_all(".iiq", f"_rgbi.tif", literal=True)
+        .str.replace_all(".iiq", "_rgbi.tif", literal=True)
         .alias("RGBI_Filename"),
         pl.col("Filename")
-        .str.replace_all(".iiq", f"_cal.tif", literal=True)
+        .str.replace_all(".iiq", "_cal.tif", literal=True)
         .alias("RGB_Filename"),
     )
 
@@ -50,19 +50,36 @@ def convert_coords(
 
     transformer = CSRSTransformer(**kwargs)
 
-    def _do_convert(s):
-        lat, lon, alt = (
-            s.struct.field("Origin (Latitude[deg]"),
-            s.struct.field("Longitude[deg]"),
-            s.struct.field("Altitude[m])"),
-        )
-        return pl.Series(list(transformer(list(zip(lon, lat, alt)))))
+    if coord_type == "cart":
+        # Handle cartesian input coordinates
+        def _do_convert_cart(s):
+            x, y, z = (
+                s.struct.field("Origin (X[m]"),
+                s.struct.field("Y[m]"),
+                s.struct.field("Z[m])"),
+            )
+            return pl.Series(list(transformer(list(zip(x, y, z)))))
 
-    df = df.with_columns(
-        pl.struct(["Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])"])
-        .map_batches(_do_convert, is_elementwise=True)
-        .alias("converted"),
-    ).drop("Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])")
+        df = df.with_columns(
+            pl.struct(["Origin (X[m]", "Y[m]", "Z[m])"])
+            .map_batches(_do_convert_cart, is_elementwise=True)
+            .alias("converted"),
+        ).drop("Origin (X[m]", "Y[m]", "Z[m])")
+    else:
+        # Handle geographic input coordinates
+        def _do_convert_geo(s):
+            lat, lon, alt = (
+                s.struct.field("Origin (Latitude[deg]"),
+                s.struct.field("Longitude[deg]"),
+                s.struct.field("Altitude[m])"),
+            )
+            return pl.Series(list(transformer(list(zip(lon, lat, alt)))))
+
+        df = df.with_columns(
+            pl.struct(["Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])"])
+            .map_batches(_do_convert_geo, is_elementwise=True)
+            .alias("converted"),
+        ).drop("Origin (Latitude[deg]", "Longitude[deg]", "Altitude[m])")
 
     if transformer.t_coords == CoordType.GEOG:
         df = df.with_columns(
@@ -81,6 +98,25 @@ def convert_coords(
             "Omega[deg]",
             "Phi[deg]",
             "Kappa[deg]",
+        )
+    elif transformer.t_coords == CoordType.CART:
+        df = df.with_columns(
+            pl.col("converted").list.get(0).alias("Origin (X[m]"),
+            pl.col("converted").list.get(1).alias("Y[m]"),
+            pl.col("converted").list.get(2).alias("Z[m])"),
+        ).select(
+            "Timestamp",
+            "RGBI_Filename",
+            "RGB_Filename",
+            "Origin (X[m]",
+            "Y[m]",
+            "Z[m])",
+            "Omega[deg]",
+            "Phi[deg]",
+            "Kappa[deg]",
+            "Roll(X)[deg]",
+            "Pitch(Y)[deg]",
+            "Yaw(Z)[deg]",
         )
     else:
         df = df.with_columns(
@@ -105,7 +141,15 @@ def convert_coords(
     return df
 
 
-def get_coord_type(df: pl.DataFrame) -> Literal["dms", "dd"]:
-    if df["Origin (Latitude[deg]"].str.contains("°").any():
+def get_coord_type(df: pl.DataFrame) -> Literal["dms", "dd", "cart"]:
+    # Check if file has cartesian coordinates
+    if "Origin (X[m]" in df.columns and "Y[m]" in df.columns and "Z[m])" in df.columns:
+        return "cart"
+    # Check if geographic coordinates are in DMS format
+    elif (
+        "Origin (Latitude[deg]" in df.columns
+        and df["Origin (Latitude[deg]"].dtype == pl.String
+        and df["Origin (Latitude[deg]"].str.contains("°").any()
+    ):
         return "dms"
     return "dd"

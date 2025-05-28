@@ -1,21 +1,28 @@
 [project]
 name = "aco_camera_csv_converter"
 version = "0.1.0"
-package-mode = false
+package-mode = true
 description = "Convert coordinates in Riegel Camera Locations CSVs"
 readme = "README.md"
 requires-python = ">=3.11"
 authors=["Taylor Denouden <taylor.denouden@hakai.org>"]
 dependencies = [
-    "csrspy>=0.6.0",
+    "csrspy>=0.7.0",
     "polars>=1.16.0",
     "streamlit>=1.40.2",
 ]
 
 [dependency-groups]
 dev = [
-    "watchdog>=6.0.0",
+    "pytest>=8.0.0",
+    "pytest-mock>=3.0.0",
 ]
 
-[tool.uv.workspace]
-members = ["proj"]
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:pyproj.*",
+    "ignore::DeprecationWarning:proj.*",
+    "error::DeprecationWarning:aco_camera_csv_converter.*",
+    "error::UserWarning:aco_camera_csv_converter.*",
+]
+
