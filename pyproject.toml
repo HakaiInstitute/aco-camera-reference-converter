@@ -18,3 +18,11 @@ dev = [
     "pytest-mock>=3.0.0",
 ]
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:pyproj.*",
+    "ignore::DeprecationWarning:proj.*",
+    "error::DeprecationWarning:aco_camera_csv_converter.*",
+    "error::UserWarning:aco_camera_csv_converter.*",
+]
+
