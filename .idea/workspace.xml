@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f9be7cb-1557-4fbc-abc5-aed69829c089" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/services.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/ui.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/aco-camera-reference-converter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aco-camera-reference-converter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/consts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +100,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "develop",
+    "last_opened_file_path": "/Users/taylor.denouden/Documents/PycharmProjects/aco-camera-reference-converter/testfiles",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -93,6 +110,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/testfiles" />
+    </key>
+  </component>
   <component name="RunManager" selected="Docker.compose.yaml: Compose Deployment">
     <configuration name="streamlit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aco-camera-reference-converter" />
@@ -154,8 +176,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.compose.yaml: Compose Deployment" />
-        <item itemvalue="Docker.traefik/compose.yaml.traefik: Compose Deployment" />
         <item itemvalue="Python.streamlit" />
+        <item itemvalue="Docker.traefik/compose.yaml.traefik: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -187,6 +209,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/aco_camera_reference_converter$streamlit.coverage" NAME="streamlit Coverage Results" MODIFIED="1748466580721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/aco_camera_reference_converter$main.coverage" NAME="main Coverage Results" MODIFIED="1733441119150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/aco_camera_csv_converter" />
     <SUITE FILE_PATH="coverage/aco_camera_reference_converter$app.coverage" NAME="streamlit Coverage Results" MODIFIED="1733442552213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

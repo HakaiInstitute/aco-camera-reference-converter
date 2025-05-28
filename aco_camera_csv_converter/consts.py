@@ -1,12 +1,26 @@
 from csrspy.enums import Reference, VerticalDatum
 
 # Constants
-REQUIRED_FILE_COLS = [
+REQUIRED_FILE_COLS_GEOGRAPHIC = [
     "Timestamp",
     "Filename",
     "Origin (Latitude[deg]",
     "Longitude[deg]",
     "Altitude[m])",
+    "Roll(X)[deg]",
+    "Pitch(Y)[deg]",
+    "Yaw(Z)[deg]",
+    "Omega[deg]",
+    "Phi[deg]",
+    "Kappa[deg]",
+]
+
+REQUIRED_FILE_COLS_CARTESIAN = [
+    "Timestamp",
+    "Filename",
+    "Origin (X[m]",
+    "Y[m]",
+    "Z[m])",
     "Roll(X)[deg]",
     "Pitch(Y)[deg]",
     "Yaw(Z)[deg]",
@@ -42,4 +56,4 @@ REFERENCE_FRAME_OPTS = [
     ("ITRF2020", Reference.ITRF20),
 ]
 
-COORD_TYPE_OPTS = ["Geographic", "Projected"]
+COORD_TYPE_OPTS = ["Geographic", "Projected", "Cartesian"]
