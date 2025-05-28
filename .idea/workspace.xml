@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f9be7cb-1557-4fbc-abc5-aed69829c089" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CLAUDE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/services.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aco_camera_csv_converter/ui.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/aco-camera-reference-converter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/aco-camera-reference-converter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/lib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aco_camera_csv_converter/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/aco_camera_csv_converter/ui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/uv.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

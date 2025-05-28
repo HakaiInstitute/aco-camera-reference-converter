@@ -5,7 +5,7 @@ from csrspy import CSRSTransformer
 from csrspy.enums import CoordType
 from csrspy.utils import sync_missing_grid_files
 
-from models import (
+from aco_camera_csv_converter.models import (
     TransformationParameters,
     CoordinateData,
     TransformationInput,
