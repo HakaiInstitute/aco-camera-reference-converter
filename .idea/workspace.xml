@@ -104,7 +104,7 @@
       <recent name="$PROJECT_DIR$/testfiles" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.compose.yaml: Compose Deployment">
+  <component name="RunManager" selected="Python.streamlit">
     <configuration name="streamlit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="aco-camera-reference-converter" />
       <option name="ENV_FILES" value="" />
@@ -164,8 +164,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.compose.yaml: Compose Deployment" />
         <item itemvalue="Python.streamlit" />
+        <item itemvalue="Docker.compose.yaml: Compose Deployment" />
         <item itemvalue="Docker.traefik/compose.yaml.traefik: Compose Deployment" />
       </list>
     </recent_temporary>
